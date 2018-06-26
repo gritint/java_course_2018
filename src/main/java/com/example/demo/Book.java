@@ -19,6 +19,7 @@ public class Book {
     }
     // public Method
     // private Method
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -51,6 +52,7 @@ public class Book {
         return true;
     }
     
-    
-    
+    public double getPrice() {
+        return this.price;
+    }
 }
