@@ -55,4 +55,12 @@ public class Book {
     public double getPrice() {
         return this.price;
     }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    
+        
+     
 }

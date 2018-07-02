@@ -10,20 +10,15 @@ public class BookItem {
     public BookItem(Book book, int quantity) {
         this.book = book;
         this.quantity = quantity;
-
+       
     }
-
-//    public Book getBook() {
-//        return book;
-//    }
-//
-//    public void add(BookItem bookItem) {
-//        // TODO Auto-generated method stub
-//
-//    }
 
     public double getTotalPrice() {
         return book.getPrice() * quantity;
+    }
+
+    public  int getQuantity() {
+        return quantity;
     }
 
 }
