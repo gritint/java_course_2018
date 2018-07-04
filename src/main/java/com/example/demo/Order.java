@@ -11,6 +11,7 @@ public class Order {
     private double discount;
     private double netPrice;
     private int difbook;
+    private double finalSumDiscount;
 
     public int getBookAmount() {
         // return this.bookItem.size();
@@ -24,7 +25,7 @@ public class Order {
 
     public double getDiscount() {
         // return this.discount;
-        return this.sumDiscount;
+        return this.finalSumDiscount;
     }
 
     public double getNetPrice() {
@@ -39,7 +40,8 @@ public class Order {
     private int quantity4;
     private int quantity5;
     private int totalQuantity2;
-    private double sumDiscount;
+    private double sumDiscount1;
+    private double sumDiscount2;
     private double perPrice1;
     private double perPrice2;
     private double perPrice3;
@@ -65,7 +67,7 @@ public class Order {
         if (this.bookItem != null) {
             calculateTotalPrice();
             // Checksamebook
-            checkDifBook();
+            checkDiscountType();
             // calculatePrice
             // this.totalPrice = bookItem.getBook().getPrice();
 
@@ -78,9 +80,10 @@ public class Order {
         }
     }
 
-    private void checkDifBook() {
+    private void checkDiscountType() {
         totalQuantity2 = 0;
-        this.sumDiscount=0;
+        this.sumDiscount1 = 0;
+        this.sumDiscount2 = 0;
 
         for (BookItem book : bookItem) {
             if (book.getName() == "H1") {
@@ -105,48 +108,99 @@ public class Order {
             }
             totalQuantity2 += book.getQuantity();
         }
-        if(totalQuantity2>1) {
+        if (totalQuantity2 > 1) {
+            if (totalQuantity2 <= 6) {
+                calDiscountType1();
+            }else {
+            if (totalQuantity2 % 2 != 0) {
+                calDiscountType1();
+            } else {
+                calDiscountType2();
+            }
+            }
+        } else {
+            this.finalSumDiscount = 0;
+        }
+
+    }
+
+    private void calDiscountType2() {
         for (int i = 0; i < totalQuantity2;) {
             difbook = 0;
             allPrice = 0.00;
-//            for (int y = 0; y < totalQuantity2 / 2;) {
-                if (quantity1 > 0) {
-                    difbook += 1;
-                    quantity1 -= 1;
-                    allPrice += perPrice1;
-                }
-                if (quantity2 > 0) {
-                    difbook += 1;
-                    quantity2 -= 1;
-                    allPrice += perPrice2;
-                }
-                if (quantity3 > 0) {
-                    difbook += 1;
-                    quantity3 -= 1;
-                    allPrice += perPrice3;
-                }
-                if (quantity4 > 0) {
-                    difbook += 1;
-                    quantity4 -= 1;
-                    allPrice += perPrice4;
-                }
-                if (quantity5 >0){
-                    difbook += 1;
-                    quantity5 -= 1;
-                    allPrice += perPrice5;
-                }
-//                y = difbook;
-//            }
+
+            if (quantity1 > 0 && difbook < totalQuantity2 / 2) {
+                difbook += 1;
+                quantity1 -= 1;
+                allPrice += perPrice1;
+            }
+            if (quantity2 > 0 && difbook < totalQuantity2 / 2) {
+                difbook += 1;
+                quantity2 -= 1;
+                allPrice += perPrice2;
+            }
+            if (quantity3 > 0 && difbook < totalQuantity2 / 2) {
+                difbook += 1;
+                quantity3 -= 1;
+                allPrice += perPrice3;
+            }
+            if (quantity4 > 0 && difbook < totalQuantity2 / 2) {
+                difbook += 1;
+                quantity4 -= 1;
+                allPrice += perPrice4;
+            }
+            if (quantity5 > 0 && difbook < totalQuantity2 / 2) {
+                difbook += 1;
+                quantity5 -= 1;
+                allPrice += perPrice5;
+            }
             if (difbook > 1) {
                 calculateDiscount();
-                this.sumDiscount += this.discount;
+                this.sumDiscount2 += this.discount;
             }
             i += difbook;
         }
+        this.finalSumDiscount = this.sumDiscount2;
+    }
+
+    private void calDiscountType1() {
+        for (int i = 0; i < totalQuantity2;) {
+            difbook = 0;
+            allPrice = 0.00;
+
+            if (quantity1 > 0) {
+                difbook += 1;
+                quantity1 -= 1;
+                allPrice += perPrice1;
+            }
+            if (quantity2 > 0) {
+                difbook += 1;
+                quantity2 -= 1;
+                allPrice += perPrice2;
+            }
+            if (quantity3 > 0) {
+                difbook += 1;
+                quantity3 -= 1;
+                allPrice += perPrice3;
+            }
+            if (quantity4 > 0) {
+                difbook += 1;
+                quantity4 -= 1;
+                allPrice += perPrice4;
+            }
+            if (quantity5 > 0) {
+                difbook += 1;
+                quantity5 -= 1;
+                allPrice += perPrice5;
+            }
+
+            if (difbook > 1) {
+                calculateDiscount();
+                this.sumDiscount1 += this.discount;
+            }
+            i += difbook;
         }
-        else {
-            this.sumDiscount=0;
-        }
+        this.finalSumDiscount = this.sumDiscount1;
     }
 
     private void calculateDiscount() {
@@ -163,30 +217,30 @@ public class Order {
         // if(getBookAmount() == 5) {
         // this.discount = getTotalPrice() * 0.25;
         // }
-//        if (difbook == 2) {
-//            this.discount = getTotalPrice() * 0.05;
-//        }
-//        if (difbook == 3) {
-//            this.discount = getTotalPrice() * 0.1;
-//        }
-//        if (difbook == 4) {
-//            this.discount = getTotalPrice() * 0.2;
-//        }
-//        if (difbook == 5) {
-//            this.discount = getTotalPrice() * 0.25;
-//        }
-      if (difbook == 2) {
-      this.discount = allPrice * 0.05;
-  }
-  if (difbook == 3) {
-      this.discount = allPrice * 0.1;
-  }
-  if (difbook == 4) {
-      this.discount = allPrice * 0.2;
-  }
-  if (difbook == 5) {
-      this.discount = allPrice * 0.25;
-  }
+        // if (difbook == 2) {
+        // this.discount = getTotalPrice() * 0.05;
+        // }
+        // if (difbook == 3) {
+        // this.discount = getTotalPrice() * 0.1;
+        // }
+        // if (difbook == 4) {
+        // this.discount = getTotalPrice() * 0.2;
+        // }
+        // if (difbook == 5) {
+        // this.discount = getTotalPrice() * 0.25;
+        // }
+        if (difbook == 2) {
+            this.discount = allPrice * 0.05;
+        }
+        if (difbook == 3) {
+            this.discount = allPrice * 0.1;
+        }
+        if (difbook == 4) {
+            this.discount = allPrice * 0.2;
+        }
+        if (difbook == 5) {
+            this.discount = allPrice * 0.25;
+        }
     }
 
     // public void addItem(BookItem bookItem) {
