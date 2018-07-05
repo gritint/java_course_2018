@@ -5,13 +5,27 @@ import java.util.List;
 
 public class Order {
 
-    // private BookItem bookItem;
-    // private int bookAmount;
     private double totalPrice;
     private double discount;
     private double netPrice;
     private int difbook;
     private double finalSumDiscount;
+    private List<BookItem> bookItem = new ArrayList<>();
+    private int totalQuantity;
+    private int quantity1;
+    private int quantity2;
+    private int quantity3;
+    private int quantity4;
+    private int quantity5;
+    private int totalQuantity2;
+    private double sumDiscount1;
+    private double sumDiscount2;
+    private double perPrice1;
+    private double perPrice2;
+    private double perPrice3;
+    private double perPrice4;
+    private double perPrice5;
+    private double allPrice;
 
     public int getBookAmount() {
         // return this.bookItem.size();
@@ -32,22 +46,6 @@ public class Order {
         return this.netPrice;
     }
 
-    private List<BookItem> bookItem = new ArrayList<>();
-    private int totalQuantity;
-    private int quantity1;
-    private int quantity2;
-    private int quantity3;
-    private int quantity4;
-    private int quantity5;
-    private int totalQuantity2;
-    private double sumDiscount1;
-    private double sumDiscount2;
-    private double perPrice1;
-    private double perPrice2;
-    private double perPrice3;
-    private double perPrice4;
-    private double perPrice5;
-    private double allPrice;
 
     // private BookItem quantity;
     public void addItem(BookItem bookItem) {
@@ -65,14 +63,12 @@ public class Order {
 
     public void process() {
         if (this.bookItem != null) {
+            
+            // CalTotalPrice
             calculateTotalPrice();
-            // Checksamebook
+            
+            // CheckDiscountType
             checkDiscountType();
-            // calculatePrice
-            // this.totalPrice = bookItem.getBook().getPrice();
-
-            // Calculate discount
-            // calculateDiscount();
 
             // Calculate net price
             this.netPrice = getTotalPrice() - getDiscount();
@@ -84,7 +80,26 @@ public class Order {
         totalQuantity2 = 0;
         this.sumDiscount1 = 0;
         this.sumDiscount2 = 0;
+// get totalQuantity     
+        totalQuantity2();
+        
+        if (totalQuantity2 > 1) {
+            if (totalQuantity2 <= 6) {
+                calDiscountType1();
+            }else {
+            if (totalQuantity2 % 2 != 0) {
+                calDiscountType1();
+            } else {
+                calDiscountType2();
+            }
+            }
+        } else {
+            this.finalSumDiscount = 0;
+        }
 
+    }
+
+    private void totalQuantity2() {
         for (BookItem book : bookItem) {
             if (book.getName() == "H1") {
                 quantity1 = book.getQuantity();
@@ -108,20 +123,6 @@ public class Order {
             }
             totalQuantity2 += book.getQuantity();
         }
-        if (totalQuantity2 > 1) {
-            if (totalQuantity2 <= 6) {
-                calDiscountType1();
-            }else {
-            if (totalQuantity2 % 2 != 0) {
-                calDiscountType1();
-            } else {
-                calDiscountType2();
-            }
-            }
-        } else {
-            this.finalSumDiscount = 0;
-        }
-
     }
 
     private void calDiscountType2() {
@@ -243,10 +244,6 @@ public class Order {
         }
     }
 
-    // public void addItem(BookItem bookItem) {
-    // this.bookItem = bookItem;
-    //
-    // }
     private void calculateTotalPrice() {
         for (BookItem book : bookItem) {
             this.totalPrice += book.getTotalPrice();

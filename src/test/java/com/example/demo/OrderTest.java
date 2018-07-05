@@ -5,7 +5,31 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class OrderTest {
-    
+    @Test
+    public void createOrderHarryBook3() {
+        Book book1 = new Book("H1", 8, 2);
+        Book book2 = new Book("H2", 8, 2);
+        Book book3 = new Book("H3", 8, 2);
+        Book book4 = new Book("H4", 8, 2);
+        Book book5 = new Book("H5", 8, 2);
+        BookItem bookItem1 = new BookItem(book1, 3);
+        BookItem bookItem2 = new BookItem(book2, 3);
+        BookItem bookItem3 = new BookItem(book3, 2);
+        BookItem bookItem4 = new BookItem(book4, 2);
+        BookItem bookItem5 = new BookItem(book5, 2);
+        Order order = new Order();
+        order.addItem(bookItem1);
+        order.addItem(bookItem2);
+        order.addItem(bookItem3);
+        order.addItem(bookItem4);
+        order.addItem(bookItem5);
+        order.process();
+        
+        assertEquals(12, order.getBookAmount());
+        assertEquals(96, order.getTotalPrice(), 0.00);
+        assertEquals("Discount not correct", (40 * 0.25) + (40 * 0.25) + (16 * 0.05), order.getDiscount(), 0.00);
+        assertEquals(96 - ( (40 * 0.25) + (40 * 0.25) + (16 * 0.05)), order.getNetPrice(), 0.00);
+    }
     @Test
     public void createOrderHarryBook1() {
         Book book1 = new Book("H1", 8, 2);
