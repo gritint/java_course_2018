@@ -14,10 +14,7 @@ public class MainSorting {
 
     private void start() {
         // create data
-        List<Employee> employees = new ArrayList<>();
-        employees.add(new Employee(1, "Somkiat", 200));
-        employees.add(new Employee(2, "Pui", 100));
-        employees.add(new Employee(3, "Abdul", 500));
+        List<Employee> employees = intialData();
         employees.forEach(System.out::println);
         
         // Sorting with Comparator
@@ -28,6 +25,14 @@ public class MainSorting {
                     Collections.sort(employees, withLambda);
         employees.forEach(System.out::println);
      }
+
+    private List<Employee> intialData() {
+        List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(1, "Somkiat", 200));
+        employees.add(new Employee(2, "Pui", 100));
+        employees.add(new Employee(3, "Abdul", 500));
+        return employees;
+    }
     
     class SortingBySalaryWithDecending implements Comparator<Employee> {
 
