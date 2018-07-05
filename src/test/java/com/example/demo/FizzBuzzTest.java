@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class FizzBuzzTest {
+public class FizzBuzzTest { 
 
 	@Test
 	public void say_1_when_input_1() {
@@ -46,7 +46,7 @@ public class FizzBuzzTest {
 	public void say_7_when_input_7() {
 		FizzBuzz fizzbuzz = new FizzBuzz();
 		String actualResult = fizzbuzz.say(7);
-		assertEquals("7", actualResult);
+		assertEquals("KBTG", actualResult);
 	}
 	@Test
 	public void say_8_when_input_8() {
